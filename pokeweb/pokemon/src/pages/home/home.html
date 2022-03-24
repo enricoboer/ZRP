@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title class="center">
+      <img src="assets/imgs/logo.png" width="100">
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="center">
+    <span>Aqui você pode saber sobre tudo do seu Pokémon favorito!</span>
+  </div><br>
+
+  <ion-searchbar [(ngModel)]='nome' showCancelButton="always" placeholder="Informe o nome do Pokemon"></ion-searchbar>
+
+  <div class="center">
+    <button ion-button (click)="buscarPokemon()" color="secondary">Pesquisar</button>
+  </div>
+
+  <div *ngIf="dadosPokemon.length > 0">
+    <ion-card class="tamCard">
+      <img src="{{dadosPokemon[0]['imagem']}}" />
+      <ion-card-content>
+        <ion-card-title>
+          {{dadosPokemon[0]['nome']}}
+        </ion-card-title>
+        <div class="divisor"></div>
+        <p class="fontemedia">
+          Habilidades:
+        </p>
+        
+        <div *ngIf="dadosPokemon[0]['habilidades'].length > 0">
+          <ion-list *ngFor="let hbl of dadosPokemon[0]['habilidades']" class="fontepequena">
+             - {{ hbl }}
+          </ion-list>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="dadosPokemon.length == 0 && pokemoninformado" class="center">
+    <p class="msgNaoEncontrado">Pokémon não encontrado!</p>
+  </div>
+</ion-content>
